@@ -9,7 +9,17 @@
 import marimo
 
 __generated_with = "0.25.0"
-app = marimo.App(width="medium")
+app = marimo.App(width="medium", app_title="Step 1. Tokens")
+
+
+@app.cell(hide_code=True)
+def _():
+    # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
+    import marimo as mo
+    import site_helpers as site
+    toc = site.load_toc()
+    mo.sidebar(mo.md("""## Pages""" + site.toc_md(toc)))
+    return (mo,)
 
 
 @app.cell(hide_code=True)
@@ -38,14 +48,6 @@ def _(mo):
     This is a [marimo](https://marimo.io) notebook, which is an advanced version of Jupyter Python notebooks.  Ff you don't have, or can't install Marimo, there is a Jupyter version in the `jupyter` folder  (requires opening in Jupyter or VS code).
     """)
     return
-
-
-@app.cell
-def _():
-    # Note this is a Marimo document, not a jupyter notebook.  Import marimo to use it.  If you wan
-    import marimo as mo
-
-    return (mo,)
 
 
 @app.cell

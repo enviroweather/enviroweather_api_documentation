@@ -12,6 +12,15 @@ app = marimo.App(width="medium")
 
 
 @app.cell(hide_code=True)
+def _():
+    import marimo as mo
+    import site_helpers as site
+    toc = site.load_toc()
+    mo.sidebar(mo.md("""## Pages""" + site.toc_md(toc)))
+    return (mo,)
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     # Enviroweather API documentation (v1)
@@ -27,13 +36,6 @@ def _(mo):
     The common thread: don't assume one error shape. Most endpoints return HTTP 200 with a JSON envelope (`error`/`message`/`status`/`data`) where a *successful* request can still carry `"error": true` - always check that field. But some routes (especially ones for retired/unavailable models) skip the envelope entirely and return a plain HTTP error status instead. Handle both.
     """)
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":

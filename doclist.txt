@@ -1,7 +1,5 @@
 index.py
-ewx_api_v1_preview.py
 ewx_api_v1_quickstart.py
-ewx_api_v1_resource_common_errors.py
 ewx_api_v1_step1_tokens.py
 ewx_api_v1_step2_weather_stations.py
 ewx_api_v1_step3_dates.py
@@ -9,3 +7,4 @@ ewx_api_v1_step4_result_model_parameters.py
 ewx_api_v1_step4a_complex_result_model_parameters.py
 ewx_api_v1_step5_result_models.py
 ewx_api_v1_step5a_complex_result_models.py
+ewx_api_v1_resource_common_errors.py

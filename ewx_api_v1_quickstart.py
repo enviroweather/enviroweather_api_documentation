@@ -27,11 +27,13 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
     import marimo as mo
-
+    import site_helpers as site
+    toc = site.load_toc()
+    mo.sidebar(mo.md("""## Pages""" + site.toc_md(toc)))
     return (mo,)
 
 
