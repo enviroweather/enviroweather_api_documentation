@@ -14,3 +14,7 @@ wheels/
 __marimo__/
 
 .pytest_cache
+
+# editor config
+.vscode/
+settings.json
