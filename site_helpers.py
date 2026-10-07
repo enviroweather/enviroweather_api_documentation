@@ -23,11 +23,33 @@ def load_toc(toc_file:str = TOC_FILE)->dict:
 
     return toc
 
+### this script is not working well. 
+ 
+def toc_md_links(scriptname = "")->str:
+    """convert dictionary of links into simple markdown bulleted list"""
+    nav_links = load_toc()
+    md_list = """\n"""
+    for key, value in nav_links.items():
+        if scriptname == "__main__":
+            file_url = f"/?file={value}.py"
+        else:
+            file_url = f"{value}.html"            
+        md_list = md_list + f"""  - [{key}]({file_url})\n"""
+    md_list = md_list
+    return md_list
+
+
 def toc_md(nav_links:dict, filetype = "html")->str:
     """convert dictionary of links into simple markdown bulleted list"""
     md_list = """\n"""
     for key, value in nav_links.items():
-        md_list = md_list + f"""  - [{key}]({value}.{filetype})\n"""
+        if filetype == "py":
+            file_url = f"/?file={value}.{filetype}"
+        elif filetype == "html":
+            file_url = f"{value}.{filetype}"    
+        else:
+            file_url = f"{value}.{filetype}"
+        md_list = md_list + f"""  - [{key}]({file_url})\n"""
     md_list = md_list
     return md_list
 

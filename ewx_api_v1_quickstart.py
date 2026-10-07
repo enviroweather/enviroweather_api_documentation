@@ -14,9 +14,20 @@ app = marimo.App(width="medium")
 
 
 @app.cell(hide_code=True)
+def _():
+    import marimo as mo
+    import site_helpers as site
+    toc_md = site.toc_md_links(link_type = __name__)
+    mo.sidebar(mo.md("""## Pages""" + toc_md))
+    return (mo,)
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Enviroweather Result Model API documentation (v1)
+    ## Enviroweather Result Model API documentation (v1)
+
+    # Model API Quickstart
 
     *Updated August 2026*
 
@@ -25,16 +36,6 @@ def _(mo):
     *note: if you have opened this notebook in a code editor or want to work with Python, see the Epilogue at he bottom for instructions on how to install components to use it, or if you have problems running it.  The first command below requires an installation, and if it does not work, please see the instructions. 📚*
     """)
     return
-
-
-@app.cell(hide_code=True)
-def _():
-    # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
-    import marimo as mo
-    import site_helpers as site
-    toc = site.load_toc()
-    mo.sidebar(mo.md("""## Pages""" + site.toc_md(toc)))
-    return (mo,)
 
 
 @app.cell(hide_code=True)

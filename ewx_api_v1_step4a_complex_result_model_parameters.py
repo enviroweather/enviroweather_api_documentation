@@ -13,11 +13,21 @@ app = marimo.App(width="medium")
 
 
 @app.cell(hide_code=True)
+def _():
+    # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
+    import marimo as mo
+    import site_helpers as site
+    toc_md = site.toc_md_links(scriptname = __name__)
+    mo.sidebar(mo.md("""## Pages""" + toc_md))
+    return (mo,)
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Enviroweather API documentation (v1)
+    ## Enviroweather API documentation (v1)
 
-    ## Step 4a: More Complex Result Model Parameters
+    # Step 4a: More Complex Result Model Parameters
 
     Covers `applescab`, `orientalfruitmoth`, and `tomcast`. Unlike the models in Step 4, these don't have constant defaults - the `defaultValue` for their inputs is `null`, but the group has a `defaultResourceKey`.
 
@@ -34,14 +44,6 @@ def _(mo):
     This is a [marimo](https://marimo.io) notebook, which is an advanced version of Jupyter Python notebooks.  Ff you don't have, or can't install Marimo, there is a Jupyter version in the `jupyter` folder  (requires opening in Jupyter or VS code).
     """)
     return
-
-
-@app.cell
-def _():
-    # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
-    import marimo as mo
-
-    return (mo,)
 
 
 @app.cell
@@ -90,7 +92,7 @@ def _(env_key_selector):
 @app.cell
 def _(ewx_env, get_environment_urls):
     api_url, rm_api_url = get_environment_urls(ewx_env)
-    return (api_url, rm_api_url)
+    return api_url, rm_api_url
 
 
 @app.cell

@@ -13,11 +13,20 @@ app = marimo.App(width="medium")
 
 
 @app.cell(hide_code=True)
+def _():
+    import marimo as mo
+    import site_helpers as site
+    toc_md = site.toc_md_links(scriptname = __name__)
+    mo.sidebar(mo.md("""## Pages""" + toc_md))
+    return (mo,)
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Enviroweather API documentation (v1)
+    ## Enviroweather API documentation (v1)
 
-    ## Step 5: Result Models
+    # Step 5: Result Models
 
     This is the payoff step - actually running a Result Model and getting data back to display in a table, chart, or map.
 
@@ -34,24 +43,6 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    ### About this notebook
-
-    This is a [marimo](https://marimo.io) notebook, which is an advanced version of Jupyter Python notebooks.  Ff you don't have, or can't install Marimo, there is a Jupyter version in the `jupyter` folder  (requires opening in Jupyter or VS code).
-    """)
-    return
-
-
-@app.cell
-def _():
-    # this is a Marimo document, not a jupyter notebook.  Import marimo to use it
-    import marimo as mo
-
-    return (mo,)
-
-
 @app.cell
 def _():
     import requests
@@ -62,11 +53,11 @@ def _():
     return (
         DEFAULT_STATION_CODE,
         ENVIRONMENTS,
+        date,
         get_auth_header,
         get_environment_urls,
         get_site_token,
         requests,
-        date,
         timedelta,
     )
 
@@ -101,7 +92,7 @@ def _(env_key_selector):
 @app.cell
 def _(ewx_env, get_environment_urls):
     api_url, rm_api_url = get_environment_urls(ewx_env)
-    return (api_url, rm_api_url)
+    return api_url, rm_api_url
 
 
 @app.cell
